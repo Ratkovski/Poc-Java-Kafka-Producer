@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Service
 @FeignClient(name = "post", url = "https://jsonplaceholder.typicode.com/")
+//@FeignClient(name = "post", url = "http://localhost:1456/")
 public interface PostClient {
 
   @RequestMapping(method = RequestMethod.GET, value = "posts/{userId}", consumes = "application/json")
