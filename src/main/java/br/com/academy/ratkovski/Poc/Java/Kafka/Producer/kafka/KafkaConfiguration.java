@@ -20,6 +20,16 @@ public class KafkaConfiguration {
 
   @Value("${kafka.bootstrap.server}")
   private String bootStrapServer;
+  @Value("${spring.kafka.producer.enable-idempotence}")
+  private String idempotence;
+  @Value("${spring.kafka.producer.acks-config}")
+  private String acks;
+  @Value("${spring.kafka.producer.retries-config}")
+  private String retries;
+  @Value("${spring.kafka.producer.schema-registry-url}")
+  private String schemaRegistryUrl;
+  @Value("${spring.kafka.producer.topic-name}")
+  private String topicName;
 
 
   @Bean
@@ -33,10 +43,10 @@ public class KafkaConfiguration {
 
 
     //create save Producer
-    config.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
-    config.put(ProducerConfig.ACKS_CONFIG, "all");
-    config.put(ProducerConfig.RETRIES_CONFIG, "10");
-    config.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://127.0.0.1:8081");
+    config.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, idempotence);
+    config.put(ProducerConfig.ACKS_CONFIG, acks);
+    config.put(ProducerConfig.RETRIES_CONFIG, retries);
+    config.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG,schemaRegistryUrl);
 
     return new DefaultKafkaProducerFactory(config);
   }
@@ -48,6 +58,6 @@ public class KafkaConfiguration {
 
   @Bean
   public NewTopic topic() {
-    return new NewTopic("test_topic", 1, (short) 1);
+    return new NewTopic(topicName, 1, (short) 1);
   }
 }
