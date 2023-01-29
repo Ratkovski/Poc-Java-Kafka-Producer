@@ -1,7 +1,5 @@
 # Poc-Kafka-Producer
 
-# Poc-Java-Sqs-DynamoDB-
-
 Link api utilizada:
 
 https://jsonplaceholder.typicode.com/posts
